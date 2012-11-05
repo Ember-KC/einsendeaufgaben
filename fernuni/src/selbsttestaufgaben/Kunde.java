@@ -1,11 +1,11 @@
 package selbsttestaufgaben;
 
 class Kunde {
-	// Attribute für Kunde
+	// Attribute fï¿½r Kunde
 	String name;
 	String anschrift;
 
-	// Konstruktor
+	// Konstruktor fÃ¼r Kunde
 	Kunde(String neuerName, String neueAnschrift) {
 		this.name = neuerName;
 		this.anschrift = neueAnschrift;
