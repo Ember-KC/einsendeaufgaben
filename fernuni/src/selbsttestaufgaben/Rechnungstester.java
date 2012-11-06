@@ -6,6 +6,9 @@ public class Rechnungstester {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		char[][][] z = new char[13][2][7];
+		int len = z.length;
+		System.out.println(len);
 
 		// Rechnung rechnung1 = new Rechnung();
 		//

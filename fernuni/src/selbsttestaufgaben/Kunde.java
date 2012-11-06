@@ -12,19 +12,19 @@ class Kunde {
 	}
 
 	// Methoden
-	void legeNameFest(final String neuerName) {
+	void setName(final String neuerName) {
 		this.name = neuerName;
 	}
 
-	void legeAnschriftFest(final String neueAnschrift) {
+	void setAnschrift(final String neueAnschrift) {
 		this.anschrift = neueAnschrift;
 	}
 
-	String liefereName() {
+	String getName() {
 		return name;
 	}
 
-	String liefereAnschrift() {
+	String getAnschrift() {
 		return anschrift;
 	}
 }

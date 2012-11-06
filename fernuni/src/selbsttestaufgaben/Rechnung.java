@@ -1,11 +1,17 @@
 package selbsttestaufgaben;
 
+import java.math.BigDecimal;
+
 class Rechnung {
 
 	double betrag;
 	double rabatt;
 	Kunde rechnungsempfaenger;
-	Rechnungsposten[] rechnungspositionen = new Rechnungsposten[100];;
+	Rechnungsposten[] rechnungspositionen = new Rechnungsposten[100];
+	double[] mehrwertsteuerBetraege = new double[2];
+	static final double VOLLEMWST = 0.19;
+	static final double REDMWST = 0.07;
+	static final double KEINEMWST = 0.00;
 
 	public static void main(String[] args) {
 		String annasName = new String("Anna Müller");
@@ -15,16 +21,21 @@ class Rechnung {
 		rechnung6.rechnungsempfaenger = kunde1;
 
 		rechnung6.fuegePostenHinzu(25, new Artikel(13235354, "Kartoffel", 1.25,
-				0.19));
-		rechnung6
-				.fuegePostenHinzu(25, new Artikel(2345678, "Eier", 1.50, 0.19));
+				VOLLEMWST));
+		rechnung6.fuegePostenHinzu(25, new Artikel(2345678, "Eier", 1.50,
+				REDMWST));
 		rechnung6.fuegePostenHinzu(25, new Artikel(9876573, "Zitronen", 0.99,
-				0.19));
-		rechnung6.legeRabattFest(0.04);
+				VOLLEMWST));
+		rechnung6.setRabatt(0.10);
+		rechnung6.berechneMehrwertsteuer(rechnung6.rechnungspositionen);
 		rechnung6.gebeAus();
 	}
 
-	double berechneBruttopreis(Rechnungsposten[] rechnungspositionen) {
+	// Bruttopreis für Gesamtrechnung berechnen
+	// TODO: Bruttoberechnung anpassen, so dass MwSt nicht mehr zeilenweise
+	// berechnet wird
+
+	BigDecimal berechneBruttopreis(Rechnungsposten[] rechnungspositionen) {
 		double bruttopreis = 0;
 		for (int i = 0; i < rechnungspositionen.length; i++) {
 			if (rechnungspositionen[i] != null) {
@@ -35,7 +46,52 @@ class Rechnung {
 			} else
 				break;
 		}
-		return bruttopreis;
+		BigDecimal bruttopreisGerundet = new BigDecimal(bruttopreis);
+		bruttopreisGerundet = bruttopreisGerundet.setScale(2,
+				BigDecimal.ROUND_HALF_UP);
+		return bruttopreisGerundet;
+
+	}
+
+	// Nettopreis der Gesamtrechnung berechnen
+
+	BigDecimal berechneNettopreis(Rechnungsposten[] rechnungspositionen) {
+
+		double betrag = 0;
+		for (int i = 0; i < rechnungspositionen.length; i++) {
+			if (rechnungspositionen[i] != null) {
+				betrag = betrag + rechnungspositionen[i].artikel.preis;
+			} else
+				break;
+		}
+
+		betrag = betrag * (1 - this.getRabatt());
+		BigDecimal betragGerundet = new BigDecimal(betrag);
+		betragGerundet = betragGerundet.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+		return betragGerundet;
+
+	}
+
+	// Mehrwertsteuerbeträge berechnen
+	// TODO MwSt-Beträge runden
+
+	void berechneMehrwertsteuer(Rechnungsposten[] rechnungspositionen) {
+
+		for (int i = 0; i < rechnungspositionen.length; i++) {
+			if (rechnungspositionen[i] != null) {
+				if (rechnungspositionen[i].artikel.mehrwertsteuer == VOLLEMWST) {
+					double volleMwst = 0.00;
+					this.mehrwertsteuerBetraege[0] = volleMwst
+							+ rechnungspositionen[i].artikel.preis * VOLLEMWST;
+				} else if (rechnungspositionen[i].artikel.mehrwertsteuer == REDMWST) {
+					double reduzierteMwst = 0.00;
+					this.mehrwertsteuerBetraege[1] = reduzierteMwst
+							+ rechnungspositionen[i].artikel.preis * REDMWST;
+				}
+			} else
+				break;
+		}
 
 	}
 
@@ -51,31 +107,26 @@ class Rechnung {
 		// this.betrag += anzahl * einzelpreis;
 	}
 
-	void legeRabattFest(final double neuerRabatt) {
+	void setRabatt(final double neuerRabatt) {
 		this.rabatt = neuerRabatt;
 	}
 
-	void legeRechnungsempfaengerFest(Kunde empfaenger) {
+	void setRechnungsempfaenger(Kunde empfaenger) {
 		this.rechnungsempfaenger = empfaenger;
 	}
 
-	double liefereRabatt() {
-		return this.rabatt;
+	double getRabatt() {
+		return rabatt;
 	}
 
-	Kunde liefereRechnungsempfaenger() {
+	Kunde getRechnungsempfaenger() {
 		return this.rechnungsempfaenger;
-	}
-
-	double berechneNettopreis() {
-		return this.betrag * (1 - this.liefereRabatt());
 	}
 
 	void gebeAus() {
 		System.out.println("An:");
-		System.out.println(this.liefereRechnungsempfaenger().liefereName());
-		System.out
-				.println(this.liefereRechnungsempfaenger().liefereAnschrift());
+		System.out.println(this.getRechnungsempfaenger().getName());
+		System.out.println(this.getRechnungsempfaenger().getAnschrift());
 		for (int i = 0; i < rechnungspositionen.length; i++) {
 			if (rechnungspositionen[i] != null) {
 
@@ -85,9 +136,13 @@ class Rechnung {
 				break;
 		}
 
-		System.out.print("Netto: ");
-		System.out.println(this.berechneNettopreis());
-		System.out.println("Brutto: ");
-		System.out.println(this.berechneBruttopreis(rechnungspositionen));
+		System.out.print("Netto: \u20ac "
+				+ this.berechneNettopreis(rechnungspositionen) + "\n");
+		System.out.println("Reduzierte MwSt: " + mehrwertsteuerBetraege[1]);
+		System.out.println("Volle MwSt: " + mehrwertsteuerBetraege[0]);
+		System.out.println("Brutto: \u20ac "
+				+ this.berechneBruttopreis(rechnungspositionen));
+		System.out.println("Sie sparen: " + this.getRabatt() * 100
+				+ " Prozent.");
 	}
 }

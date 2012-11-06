@@ -4,11 +4,11 @@ class Rechnungsposten {
 	int anzahl;
 	Artikel artikel;
 
-	// TO DO: Gesamt-Nettopreis für die Position berechnen
+	// TODO: Gesamt-Nettopreis für die Position berechnen
 
 	Rechnungsposten(final int anzahl, final Artikel artikel) {
-		this.legeAnzahlFest(anzahl);
-		this.legeArtikelFest(artikel);
+		this.setAnzahl(anzahl);
+		this.setArtikel(artikel);
 	}
 
 	@Override
@@ -22,23 +22,23 @@ class Rechnungsposten {
 		return stb.toString();
 	}
 
-	void legeAnzahlFest(final int neueAnzahl) {
+	void setAnzahl(final int neueAnzahl) {
 		this.anzahl = neueAnzahl;
 	}
 
-	void legeArtikelFest(final Artikel neuerArtikel) {
+	void setArtikel(final Artikel neuerArtikel) {
 		this.artikel = neuerArtikel;
 	}
 
 	double berechneGesamtbetrag() {
-		return this.liefereAnzahl() * this.liefereArtikel().lieferePreis();
+		return this.getAnzahl() * this.getArtikel().getPreis();
 	}
 
-	int liefereAnzahl() {
+	int getAnzahl() {
 		return this.anzahl;
 	}
 
-	Artikel liefereArtikel() {
+	Artikel getArtikel() {
 		return this.artikel;
 	}
 }

@@ -5,44 +5,44 @@ class Artikel {
 	String beschreibung;
 	double preis;
 	double mehrwertsteuer;
-	
+
 	Artikel(final long artikelnr, final String beschreibung,
 			final double preis, double mehrwertsteuer) {
-		this.legeArtikelnummerFest(artikelnr);
-		this.legeBeschreibungFest(beschreibung);
-		this.legePreisFest(preis);
-		this.legeMehrwertsteuerFest(mehrwertsteuer);
+		this.setArtikelnummer(artikelnr);
+		this.setBeschreibung(beschreibung);
+		this.setPreis(preis);
+		this.setMehrwertsteuer(mehrwertsteuer);
 	}
-	
-	void legeArtikelnummerFest(final long neueNr) {
+
+	void setArtikelnummer(final long neueNr) {
 		this.artikelnr = neueNr;
 	}
-	
-	void legeBeschreibungFest(final String neueB) {
+
+	void setBeschreibung(final String neueB) {
 		this.beschreibung = neueB;
 	}
-	
-	void legeMehrwertsteuerFest(double neueMehrwertsteuer) {
+
+	void setMehrwertsteuer(double neueMehrwertsteuer) {
 		this.mehrwertsteuer = neueMehrwertsteuer;
 	}
-	
-	void legePreisFest(final double neuerPreis) {
+
+	void setPreis(final double neuerPreis) {
 		this.preis = neuerPreis;
 	}
-	
-	long liefereArtikelnummer() {
+
+	long getArtikelnummer() {
 		return this.artikelnr;
 	}
-	
-	String liefereBeschreibung() {
+
+	String getBeschreibung() {
 		return this.beschreibung;
 	}
-	
-	double lieferePreis() {
+
+	double getPreis() {
 		return this.preis;
 	}
-	
-	double liefereMehrwertsteuer() {
+
+	double getMehrwertsteuer() {
 		return this.mehrwertsteuer;
 	}
 }
