@@ -8,7 +8,7 @@ class Rechnung {
 	double rabatt;
 	Kunde rechnungsempfaenger;
 	Rechnungsposten[] rechnungspositionen = new Rechnungsposten[100];
-	double[] mehrwertsteuerBetraege = new double[2];
+	BigDecimal[] mehrwertsteuerBetraege = new BigDecimal[2];
 	static final double VOLLEMWST = 0.19;
 	static final double REDMWST = 0.07;
 	static final double KEINEMWST = 0.00;
@@ -74,20 +74,30 @@ class Rechnung {
 	}
 
 	// Mehrwertsteuerbeträge berechnen
-	// TODO MwSt-Beträge runden
+	// TODO: MwSt-Berechnung so anpassen, dass sie auf den REDUZIERTEN
+	// Nettobetrag geht
 
 	void berechneMehrwertsteuer(Rechnungsposten[] rechnungspositionen) {
 
 		for (int i = 0; i < rechnungspositionen.length; i++) {
 			if (rechnungspositionen[i] != null) {
 				if (rechnungspositionen[i].artikel.mehrwertsteuer == VOLLEMWST) {
-					double volleMwst = 0.00;
-					this.mehrwertsteuerBetraege[0] = volleMwst
+					double volleMwst = 0;
+					volleMwst = volleMwst
 							+ rechnungspositionen[i].artikel.preis * VOLLEMWST;
+					BigDecimal mwstGerundet = new BigDecimal(volleMwst);
+					mwstGerundet = mwstGerundet.setScale(2,
+							BigDecimal.ROUND_HALF_UP);
+					this.mehrwertsteuerBetraege[0] = mwstGerundet;
 				} else if (rechnungspositionen[i].artikel.mehrwertsteuer == REDMWST) {
-					double reduzierteMwst = 0.00;
-					this.mehrwertsteuerBetraege[1] = reduzierteMwst
+					double reduzierteMwst = 0;
+					reduzierteMwst = reduzierteMwst
 							+ rechnungspositionen[i].artikel.preis * REDMWST;
+					BigDecimal mwstGerundet = new BigDecimal(reduzierteMwst);
+					mwstGerundet = mwstGerundet.setScale(2,
+							BigDecimal.ROUND_HALF_UP);
+					this.mehrwertsteuerBetraege[1] = mwstGerundet;
+
 				}
 			} else
 				break;
@@ -95,6 +105,14 @@ class Rechnung {
 
 	}
 
+	/**
+	 * Test
+	 * 
+	 * @param anzahl
+	 *            Anzahl der Artikel
+	 * @param artikel
+	 *            Artikel
+	 */
 	public void fuegePostenHinzu(int anzahl, Artikel artikel) {
 		for (int i = 0; i < this.rechnungspositionen.length; i++) {
 			if (this.rechnungspositionen[i] == null) {
@@ -138,8 +156,9 @@ class Rechnung {
 
 		System.out.print("Netto: \u20ac "
 				+ this.berechneNettopreis(rechnungspositionen) + "\n");
-		System.out.println("Reduzierte MwSt: " + mehrwertsteuerBetraege[1]);
-		System.out.println("Volle MwSt: " + mehrwertsteuerBetraege[0]);
+		System.out.println("Reduzierte MwSt: \u20ac "
+				+ mehrwertsteuerBetraege[1]);
+		System.out.println("Volle MwSt: \u20ac " + mehrwertsteuerBetraege[0]);
 		System.out.println("Brutto: \u20ac "
 				+ this.berechneBruttopreis(rechnungspositionen));
 		System.out.println("Sie sparen: " + this.getRabatt() * 100
