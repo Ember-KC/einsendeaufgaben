@@ -12,7 +12,11 @@ public interface Zahlenfrage {
 
 	public boolean istRichtigBeantwortet();
 
-	// legt die Antwort auf diese Frage fest
+	/**
+	 * legt die Antwort auf diese Frage fest
+	 * 
+	 * @param antwort
+	 */
 
 	public void legeAntwortFest(int antwort);
 

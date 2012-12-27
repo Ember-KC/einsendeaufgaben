@@ -1,3 +1,7 @@
+/**@author: Kathrin Siegmann
+ * 
+ */
+
 package quiz;
 
 import java.util.ArrayList;

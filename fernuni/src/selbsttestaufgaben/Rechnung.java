@@ -26,7 +26,7 @@ class Rechnung {
 				REDMWST));
 		rechnung6.fuegePostenHinzu(25, new Artikel(9876573, "Zitronen", 0.99,
 				VOLLEMWST));
-		rechnung6.setRabatt(0.10);
+		rechnung6.bestimmeRabatt(rechnung6.rechnungsempfaenger);
 		rechnung6.berechneMehrwertsteuer(rechnung6.rechnungspositionen);
 		rechnung6.gebeAus();
 	}
@@ -65,7 +65,7 @@ class Rechnung {
 				break;
 		}
 
-		betrag = betrag * (1 - this.getRabatt());
+		betrag = betrag * (1 - this.bestimmeRabatt(rechnungsempfaenger));
 		BigDecimal betragGerundet = new BigDecimal(betrag);
 		betragGerundet = betragGerundet.setScale(2, BigDecimal.ROUND_HALF_UP);
 
@@ -105,6 +105,13 @@ class Rechnung {
 
 	}
 
+	public final int bestimmeRabatt(Kunde kunde) {
+		// TODO: Methode implementieren mit Unterscheidung zwischen Kunde und
+		// Premiumkunde
+		int discount = 0;
+		return discount;
+	}
+
 	/**
 	 * Test
 	 * 
@@ -125,16 +132,8 @@ class Rechnung {
 		// this.betrag += anzahl * einzelpreis;
 	}
 
-	void setRabatt(final double neuerRabatt) {
-		this.rabatt = neuerRabatt;
-	}
-
 	void setRechnungsempfaenger(Kunde empfaenger) {
 		this.rechnungsempfaenger = empfaenger;
-	}
-
-	double getRabatt() {
-		return rabatt;
 	}
 
 	Kunde getRechnungsempfaenger() {
@@ -161,7 +160,8 @@ class Rechnung {
 		System.out.println("Volle MwSt: \u20ac " + mehrwertsteuerBetraege[0]);
 		System.out.println("Brutto: \u20ac "
 				+ this.berechneBruttopreis(rechnungspositionen));
-		System.out.println("Sie sparen: " + this.getRabatt() * 100
+		System.out.println("Sie sparen: "
+				+ this.bestimmeRabatt(getRechnungsempfaenger()) * 100
 				+ " Prozent.");
 	}
 }

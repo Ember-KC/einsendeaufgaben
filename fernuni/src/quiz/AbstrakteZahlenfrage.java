@@ -1,3 +1,6 @@
+/**@author Kathrin
+ * 
+ */
 package quiz;
 
 class AbstrakteZahlenfrage implements Zahlenfrage {
