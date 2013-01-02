@@ -10,13 +10,13 @@ public class RekursivAufgaben {
 		System.out.println("Geben Sie bitte eine Zahl ein!");
 		int zahl = scan.nextInt();
 		System.out.println("Rekursive Summe: " + summeRekursiv(zahl));
-		System.out.println("Fakultät iterativ: " + fakultaetIterativ(zahl));
-		System.out.println("Fakultät rekursiv: " + fakultaetRekursiv(zahl));
+		System.out.println("Fakultï¿½t iterativ: " + fakultaetIterativ(zahl));
+		System.out.println("Fakultï¿½t rekursiv: " + fakultaetRekursiv(zahl));
 
 	}
 
 	static int summeRekursiv(int n) {
-		// Basisfall: keine Zahl übrig
+		// Basisfall: keine Zahl ï¿½brig
 		if (n <= 0) {
 			return 0;
 		}
@@ -90,5 +90,20 @@ public class RekursivAufgaben {
 			return false;
 		}
 		return istPalindromRekursiv(s.substring(1, s.length() - 1));
+	}
+	
+	public long multipliziere(long a, long b){
+		
+		if (a < 0 || b < 0 ) {
+			throw new IllegalArgumentException("Keine negativen Zahlen eingeben!");
+		}		
+		else if (a <= 1) {
+			return b;
+		}
+		//a muss bei jedem Durchgang dekrementiert werden;
+		a--;
+		
+		return multipliziere(a, b) + b;
+		
 	}
 }

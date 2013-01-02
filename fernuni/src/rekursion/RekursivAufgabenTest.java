@@ -42,4 +42,27 @@ public class RekursivAufgabenTest extends TestCase {
 		boolean ergebnis = ra.istPalindromRekursiv("Arschloch");
 		assertEquals(false, ergebnis);
 	}
+	
+	public void testeMultipliziere1() {
+		RekursivAufgaben ra = new RekursivAufgaben();
+		long ergebnis = ra.multipliziere(4, 3);
+		assertEquals(12, ergebnis);
+	}
+	
+	public void testeMultipliziere2() {
+		RekursivAufgaben ra = new RekursivAufgaben();
+		long ergebnis = ra.multipliziere(7, 7);
+		assertEquals(49, ergebnis);
+	}
+	 public void testIllegalArguments() throws Exception {
+		  try {
+			  RekursivAufgaben ra = new RekursivAufgaben();
+			  long ergebnis = ra.multipliziere(-7, 7);
+			fail("Keine negativen Zahlen eingeben!");
+		  }
+		  catch (IllegalArgumentException expected) {
+			assertTrue("Exception fliegt nicht!",
+			expected.getMessage().indexOf("") >= 0);
+		  }
+		 }
 }

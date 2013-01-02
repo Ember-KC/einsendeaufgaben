@@ -57,5 +57,7 @@ public class SummeRekursiv {
 		return berechneSummeGeraderZahlen(n-1) +n;
 		
 	}
-
+	
+	
 }
+
