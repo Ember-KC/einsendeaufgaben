@@ -3,6 +3,7 @@ package listen;
 public class ListNode {
 
 	private int entry;
+	private String stringEntry;
 	private ListNode next;
 
 	public ListNode(int value) {
@@ -11,6 +12,11 @@ public class ListNode {
 
 	public ListNode(int value, ListNode nextNode) {
 		this.entry = value;
+		this.next = nextNode;
+	}
+
+	public ListNode(String value, ListNode nextNode) {
+		this.stringEntry = value;
 		this.next = nextNode;
 	}
 

@@ -219,4 +219,26 @@ public class VerketteteListe {
 		return teilliste;
 	}
 
+	// Methode prüft in einer sortierten Liste, ob ein bestimmter Wert enthalten
+	// ist
+
+	public boolean containsSorted(int value) {
+		return containsSorted(this.head, value);
+	}
+
+	private boolean containsSorted(ListNode node, int value) {
+		if (node == null) {
+			return false;
+		}
+		System.out
+				.println("Node-Wert:" + node.getEntry() + ", Value: " + value);
+		if (node.getEntry() > value) {
+			return false;
+		}
+		if (node.getEntry() == value) {
+			return true;
+		}
+		return containsSorted(node.getNext(), value);
+	}
+
 }

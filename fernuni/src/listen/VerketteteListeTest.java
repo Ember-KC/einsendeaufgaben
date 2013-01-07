@@ -129,4 +129,39 @@ public class VerketteteListeTest extends TestCase {
 
 	}
 
+	// Test für contains()-Methode in sortierten Listen
+	public void testContainsSorted1() {
+		VerketteteListe liste = new VerketteteListe();
+		liste.add(8);
+		liste.add(5);
+		liste.add(3);
+		liste.add(2);
+		boolean ergebnis = liste.containsSorted(3);
+		assertEquals(true, ergebnis);
+
+	}
+
+	public void testContainsSorted2() {
+		VerketteteListe liste = new VerketteteListe();
+		liste.add(8);
+		liste.add(5);
+		liste.add(3);
+		liste.add(2);
+		boolean ergebnis = liste.containsSorted(4);
+		assertEquals(false, ergebnis);
+
+	}
+
+	public void testContainsSorted3() {
+		VerketteteListe liste = new VerketteteListe();
+		liste.add(4);
+		liste.add(8);
+		liste.add(5);
+		liste.add(3);
+		liste.add(2);
+		boolean ergebnis = liste.containsSorted(4);
+		assertEquals(false, ergebnis);
+
+	}
+
 }
