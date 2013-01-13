@@ -33,7 +33,7 @@ public class BinaryTreeNode {
 		return this.rightNeighbour;
 	}
 
-	public void setLeftRightNeighbour(BinaryTreeNode rightNeighbour) {
+	public void setRightNeighbour(BinaryTreeNode rightNeighbour) {
 		this.rightNeighbour = rightNeighbour;
 	}
 
