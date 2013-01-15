@@ -10,6 +10,7 @@ public class BinarySearchTreeMain {
 		int[] entries = { 7, 12, 20, 3, 5, 1, 6, 9 };
 		binTree.fillSearchTree(entries);
 		binTree.printInorder();
+		System.out.println(binTree.containsValue(22));
 	}
 
 }

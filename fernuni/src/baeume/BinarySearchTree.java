@@ -1,6 +1,7 @@
 package baeume;
 
 public class BinarySearchTree extends BinaryTree {
+	boolean gefunden = false;
 
 	public BinarySearchTree(BinaryTreeNode root) {
 		super(root);
@@ -51,5 +52,36 @@ public class BinarySearchTree extends BinaryTree {
 			}
 		}
 
+	}
+
+	public boolean containsValue(int wert) {
+		return containsValue(this.getRoot(), wert);
+
+	}
+
+	public boolean containsValue(BinaryTreeNode node, int wert) {
+
+		if (node == null) {
+			return gefunden;
+		}
+		// 1. Mit dem Root-Knoten beginnen und den Root-Inhalt mit dem Wert
+		// vergleichen
+		// 2. if Wert == root-Wert --> gefunden auf true setzen und
+		// zurückgeben
+		if (node.getEntry() == wert) {
+			gefunden = true;
+			return gefunden;
+		}
+		// 3. Wenn der Wert kleiner als der aktuelle Knoten ist: Methode
+		// erneut aufrufen mit dem linken Nachbarn des Knotens
+		if (wert < node.getEntry()) {
+			containsValue(node.getLeftNeighbour(), wert);
+		}
+		// 4. Wenn der Wert größer als der aktuelle Knoten ist: Methode erneut
+		// aufrufen mit dem rechten Nachbarn des Knotens
+		if (wert > node.getEntry()) {
+			containsValue(node.getRightNeighbour(), wert);
+		}
+		return gefunden;
 	}
 }
