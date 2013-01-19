@@ -8,20 +8,17 @@ public class RekursivAufgabenTest extends TestCase {
 
 	@Test
 	public void testPower() {
-		RekursivAufgaben ra = new RekursivAufgaben();
-		int ergebnis = ra.power(4, 3);
+		int ergebnis = RekursivAufgaben.power(4, 3);
 		assertEquals(64, ergebnis);
 	}
 
 	public void testFibonacci() {
-		RekursivAufgaben ra = new RekursivAufgaben();
-		int ergebnis = ra.fibIterativ(9);
+		int ergebnis = RekursivAufgaben.fibIterativ(9);
 		assertEquals(34, ergebnis);
 	}
 
 	public void testPalindrom() {
-		RekursivAufgaben ra = new RekursivAufgaben();
-		boolean ergebnis = ra.istPalindrom("Lagerregal");
+		boolean ergebnis = RekursivAufgaben.istPalindrom("Lagerregal");
 		assertEquals(true, ergebnis);
 	}
 
@@ -42,27 +39,27 @@ public class RekursivAufgabenTest extends TestCase {
 		boolean ergebnis = ra.istPalindromRekursiv("Arschloch");
 		assertEquals(false, ergebnis);
 	}
-	
+
 	public void testeMultipliziere1() {
 		RekursivAufgaben ra = new RekursivAufgaben();
 		long ergebnis = ra.multipliziere(4, 3);
 		assertEquals(12, ergebnis);
 	}
-	
+
 	public void testeMultipliziere2() {
 		RekursivAufgaben ra = new RekursivAufgaben();
 		long ergebnis = ra.multipliziere(7, 7);
 		assertEquals(49, ergebnis);
 	}
-	 public void testIllegalArguments() throws Exception {
-		  try {
-			  RekursivAufgaben ra = new RekursivAufgaben();
-			  long ergebnis = ra.multipliziere(-7, 7);
+
+	public void testIllegalArguments() throws Exception {
+		try {
+			RekursivAufgaben ra = new RekursivAufgaben();
+			ra.multipliziere(-7, 7);
 			fail("Keine negativen Zahlen eingeben!");
-		  }
-		  catch (IllegalArgumentException expected) {
-			assertTrue("Exception fliegt nicht!",
-			expected.getMessage().indexOf("") >= 0);
-		  }
-		 }
+		} catch (IllegalArgumentException expected) {
+			assertTrue("Exception fliegt nicht!", expected.getMessage()
+					.indexOf("") >= 0);
+		}
+	}
 }

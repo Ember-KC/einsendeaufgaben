@@ -12,6 +12,7 @@ public class RekursivAufgaben {
 		System.out.println("Rekursive Summe: " + summeRekursiv(zahl));
 		System.out.println("Fakult�t iterativ: " + fakultaetIterativ(zahl));
 		System.out.println("Fakult�t rekursiv: " + fakultaetRekursiv(zahl));
+		scan.close();
 
 	}
 
@@ -91,19 +92,19 @@ public class RekursivAufgaben {
 		}
 		return istPalindromRekursiv(s.substring(1, s.length() - 1));
 	}
-	
-	public long multipliziere(long a, long b){
-		
-		if (a < 0 || b < 0 ) {
-			throw new IllegalArgumentException("Keine negativen Zahlen eingeben!");
-		}		
-		else if (a <= 1) {
+
+	public long multipliziere(long a, long b) {
+
+		if (a < 0 || b < 0) {
+			throw new IllegalArgumentException(
+					"Keine negativen Zahlen eingeben!");
+		} else if (a <= 1) {
 			return b;
 		}
-		//a muss bei jedem Durchgang dekrementiert werden;
+		// a muss bei jedem Durchgang dekrementiert werden;
 		a--;
-		
+
 		return multipliziere(a, b) + b;
-		
+
 	}
 }
