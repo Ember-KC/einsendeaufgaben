@@ -16,6 +16,7 @@ public class StringFilterMain {
 			ArrayList<String> stringList = filter.readFile();
 			ArrayList<String> capitalStrings = filter.checkStrings(stringList);
 			filter.writeFile(capitalStrings);
+			filter.findeKuerzesteUndLaengsteZeichenkette(capitalStrings);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

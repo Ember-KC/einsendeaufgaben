@@ -61,5 +61,18 @@ public class RekursivAufgabenTest extends TestCase {
 			assertTrue("Exception fliegt nicht!", expected.getMessage()
 					.indexOf("") >= 0);
 		}
+
+	}
+
+	public void testeKomischeRekursivAufgabe1() {
+		RekursivAufgaben ra = new RekursivAufgaben();
+		int ergebnis = ra.komischeRekursivAufgabe(4);
+		assertEquals(8, ergebnis);
+	}
+
+	public void testeKomischeRekursivAufgabe2() {
+		RekursivAufgaben ra = new RekursivAufgaben();
+		int ergebnis = ra.komischeRekursivAufgabe(6);
+		assertEquals(2, ergebnis);
 	}
 }

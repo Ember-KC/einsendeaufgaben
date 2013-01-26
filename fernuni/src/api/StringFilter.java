@@ -79,4 +79,28 @@ public class StringFilter {
 		pw.close();
 
 	}
+
+	void findeKuerzesteUndLaengsteZeichenkette(ArrayList<String> stringList) {
+		if (stringList == null) {
+			return;
+		}
+		String shortest = stringList.get(0);
+		String longest = stringList.get(0);
+
+		for (String wort : stringList) {
+			if (wort == null) {
+				return;
+			}
+			if (wort.length() < shortest.length()) {
+				shortest = wort;
+			}
+			if (wort.length() > longest.length()) {
+				longest = wort;
+			}
+
+		}
+
+		System.out.println("Kürzeste Zeichenkette: " + shortest);
+		System.out.println("Längste Zeichenkette: " + longest);
+	}
 }

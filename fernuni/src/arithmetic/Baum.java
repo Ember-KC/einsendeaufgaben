@@ -35,19 +35,4 @@ public class Baum {
 
 	}
 
-	/*
-	 * private String toString(Knoten knoten) { if (knoten == null) { return "";
-	 * } // wenn beim Durchlaufen ein Knoten ohne Nachfolger gefunden wird, wird
-	 * // der Knoten gedruckt if (knoten.liefereErstenOperand() == null &&
-	 * knoten.liefereZweitenOperand() == null) { return knoten.toString(); } //
-	 * Baum mit getLeftNeighbour durchlaufen, bis der erste Knoten ohne //
-	 * Nachfolger gefunden wird toString(knoten.liefereErstenOperand()); String
-	 * druck = knoten.toString(); // Baum mit getRightNeighbour durchlaufen, bis
-	 * der erste ohne Nachfolger // gefunden wird
-	 * toString(knoten.liefereZweitenOperand()); // bei der Rückabwicklung der
-	 * Rekursion werden die auf dem Weg zum Blatt // durchlaufenen Knoten
-	 * gedruckt
-	 * 
-	 * return druck; }
-	 */
 }

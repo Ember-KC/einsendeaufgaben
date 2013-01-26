@@ -107,4 +107,17 @@ public class RekursivAufgaben {
 		return multipliziere(a, b) + b;
 
 	}
+
+	public int komischeRekursivAufgabe(int n) {
+		if (n == 0) {
+			return 3;
+		} else {
+			int result = komischeRekursivAufgabe(n - 1);
+			if (result % 2 == 0) {
+				return result / 2;
+			} else {
+				return 3 * result + 1;
+			}
+		}
+	}
 }

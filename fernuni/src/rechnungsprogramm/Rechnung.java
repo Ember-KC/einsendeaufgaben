@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-
 class Rechnung {
 
 	private Kunde rechnungsempfaenger;

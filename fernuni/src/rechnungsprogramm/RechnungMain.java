@@ -1,7 +1,8 @@
 package rechnungsprogramm;
 
 import java.io.FileNotFoundException;
-
+import java.io.IOException;
+import java.util.Scanner;
 
 public class RechnungMain {
 
@@ -10,19 +11,31 @@ public class RechnungMain {
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
-		String annasName = new String("Anna Müller");
-		String annasAnschrift = "Mühlenweg 2, 12345 Irgendwo";
-		Kunde kunde1 = new Kunde(annasName, annasAnschrift);
-		Rechnung rechnung6 = new Rechnung(kunde1);
+		Kassenanwendung kasse = null;
+		try {
+			kasse = new Kassenanwendung();
 
-		rechnung6.fuegePostenHinzu(25, new Artikel(13235354, "Kartoffel", 1.25,
-				Rechnung.VOLLEMWST));
-		rechnung6.fuegePostenHinzu(25, new Artikel(2345678, "Eier", 1.50,
-				Rechnung.REDMWST));
-		rechnung6.fuegePostenHinzu(25, new Artikel(9876573, "Zitronen", 0.99,
-				Rechnung.VOLLEMWST));
-		rechnung6.bestimmeRabatt(rechnung6.getRechnungsempfaenger());
-		rechnung6.berechneMehrwertsteuer(rechnung6.rechnungspositionen);
-		rechnung6.speichern();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Bitte geben Sie den Namen des Kunden ein.");
+		Scanner scan = new Scanner(System.in);
+		String kundenName = scan.nextLine();
+		System.out.println("Bitte geben Sie die Adresse des Kunden ein.");
+		String kundenAnschrift = scan.nextLine();
+		Kunde kunde = new Kunde(kundenName, kundenAnschrift);
+		Rechnung rechnung = new Rechnung(kunde);
+		System.out
+				.println("Bitte geben Sie die gewünschten Artikelnummern ein.");
+		String artikelNr = scan.nextLine();
+		rechnung.fuegePostenHinzu(25, kasse.getArtikelMap().get(artikelNr));
+		if (kasse.getArtikelMap().get(artikelNr) == null) {
+			System.out.println("Artikelnummer existiert nicht.");
+		}
+		System.out.println("Rechnung wird erzeugt.");
+		rechnung.bestimmeRabatt(rechnung.getRechnungsempfaenger());
+		rechnung.berechneMehrwertsteuer(rechnung.rechnungspositionen);
+		rechnung.speichern();
+		scan.close();
 	}
 }
