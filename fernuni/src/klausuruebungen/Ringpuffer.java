@@ -35,19 +35,18 @@ public class Ringpuffer {
 
 	public void schreibe(int wert) {
 		if (getIn().getWert() != 0) {
-			System.out.println("Puffer voll");
-		} else {
-			this.getIn().setWert(wert);
-			this.setIn(this.in.getNaechster());
+			this.vergroessern();
 		}
+		this.getIn().setWert(wert);
+		this.setIn(this.in.getNaechster());
+
 	}
 
 	public void vergroessern() {
-		this.setIn(this.getIn().getNaechster());
-		RingpufferElement neuesElement = new RingpufferElement(this.getIn(), 0);
+		RingpufferElement anknuepfer = this.getIn().getNaechster();
+		RingpufferElement neuesElement = new RingpufferElement(anknuepfer, 0);
+		this.getIn().setNaechster(neuesElement);
 		this.setIn(neuesElement);
-		this.getOut().setNaechster(neuesElement);
-		this.setOut(neuesElement);
 
 	}
 
